@@ -1,8 +1,11 @@
 package mylogger_test
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-//logger 日志结构体
+// logger 日志结构体
 type Logger struct {
 	Level LogLevel
 }
@@ -10,21 +13,28 @@ type Logger struct {
 //Newlog 构造函数
 
 func NewLog(levelStr string) Logger {
-	level,err :=parseLogLevel(levelStr)
-	if err !=nil{
+	level, err := parseLogLevel(levelStr)
+	if err != nil {
 		panic(err)
 	}
 	return Logger{
-		Level:level,
+		Level: level,
 	}
 }
 
+func log(lv logLevel,msg string){
+	fmt.Printf()
+}
+
 func (l Logger) Debug(msg string) {
-	now :=time.Now()
-	fmt.Printf("[%s] %s" now.Format("2006-01-02 15:04:05"),msg)
+	if l.enable(DEBUG) {
+		now := time.Now()
+		funcName, fileName, lineNo := getInfo(2)
+		fmt.Printf("[%s][DEBUG][%s:%s:%d]%s", now.Format("2006-01-02 15:04:05"), ,fileName,funcName,lineNumber,msg)
+	}
 }
 func (l Logger) Info(msg string) {
-	fmt.Println(msg) 
+	fmt.Println(msg)
 }
 func (l Logger) Warning(msg string) {
 	fmt.Println(msg)
