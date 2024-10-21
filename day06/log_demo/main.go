@@ -27,14 +27,17 @@ func main() {
 
 	//日志要支持开关
 	//日志要有时间、行号、文件名、日志级别、日志信息
-
+	id := 10010
+	name := "lixiang"
 	//日志文件要切割
-	log := mylogger_test.NewLog()
+	log := mylogger_test.NewLog("DEBUG")
 	for {
-		log.Debug("这是一条Debug log")
+		log.Debug("这是一条Debug log,id:%d,name:%s", id, name)
 		log.Info("这是一条info log")
 		log.Warning("这是一条warning log")
-		log.Error("error")
+		log.Error("这是一条Error日志")
+		log.Fatal("这是一条Fatal日志")
 		time.Sleep(time.Second * 3)
 	}
+
 }
