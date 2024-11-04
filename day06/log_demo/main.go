@@ -30,7 +30,8 @@ func main() {
 	id := 10010
 	name := "lixiang"
 	//日志文件要切割
-	log := mylogger_test.NewLog("DEBUG")
+	// log := mylogger_test.NewLog("DEBUG")
+	log := mylogger_test.NewFileLogger("Info", "./", "wanp.log", 10*1024*1024)
 	for {
 		log.Debug("这是一条Debug log,id:%d,name:%s", id, name)
 		log.Info("这是一条info log")

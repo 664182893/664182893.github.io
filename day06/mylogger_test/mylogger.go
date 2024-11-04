@@ -6,6 +6,7 @@ import (
 	"path"
 	"runtime"
 	"strings"
+	"time"
 )
 
 // 往终端写日志相关内容
@@ -74,4 +75,11 @@ func getInfo(skip int) (funcName, fileName string, lineNo int) {
 	fileName = path.Base(file)
 	funcName = strings.Split(funcName, ".")[1]
 	return
+}
+
+func log(lv LogLevel, format string, a ...interface{}) {
+	msg := fmt.Sprintf(format, a...)
+	now := time.Now()
+	funcName, fileName, lineNo := getInfo(3)
+	fmt.Printf("[%s][%s][%s:%s:%d]%s \n", now.Format("2006-01-02 15:04:05"), getLogString(lv), fileName, funcName, lineNo, msg)
 }
